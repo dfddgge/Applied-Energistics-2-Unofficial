@@ -18,15 +18,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import appeng.api.config.RedstoneMode;
+import appeng.api.config.Settings;
 import appeng.api.config.Upgrades;
 import appeng.api.networking.ticking.IGridTickable;
 import appeng.api.networking.ticking.TickRateModulation;
 import appeng.api.storage.data.IAEItemStack;
+import appeng.api.util.IConfigManager;
 import appeng.helpers.IOreFilterable;
 import appeng.me.GridAccessException;
 import appeng.tile.inventory.AppEngInternalAEInventory;
 import appeng.util.InventoryAdaptor;
 import appeng.util.Platform;
+import scala.tools.nsc.Global.Run;
 
 public abstract class PartSharedItemBus extends PartUpgradeable implements IGridTickable, IOreFilterable {
 
@@ -39,6 +42,11 @@ public abstract class PartSharedItemBus extends PartUpgradeable implements IGrid
 
     public PartSharedItemBus(final ItemStack is) {
         super(is);
+    }
+
+    @Override
+    public void updateSetting(final IConfigManager manager, final Enum settingName, final Enum newValue) {
+        this.updateState();
     }
 
     @Override
